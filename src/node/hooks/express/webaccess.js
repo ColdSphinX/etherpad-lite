@@ -12,7 +12,11 @@ var cookieParser = require('cookie-parser');
 exports.basicAuth = function (req, res, next) {
   var hookResultMangle = function (cb) {
     return function (err, data) {
-      return cb(!err && data.length && data[0]);
+      if (data) {
+        return cb(!err && data.length && data[0]);
+      } else {
+        return cb(!err && 0 && data);
+      }
     }
   }
 
